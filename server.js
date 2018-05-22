@@ -25,12 +25,16 @@ let socket = io(server);
 
 socket.on("connection", socket => {
 	console.log("Client connected : " + socket.handshake.address);
+	socket.emit("connected");
+	socket.on("sendDate", arg=>{
+		socket.emit("statusUpdate", "Analyzing " + item.name);
+	})
 });
 
 socket.on("sendData", arg => {
     console.log(socket.handshake.address + " sent data");
     arg.forEach((item, index, array) => {
-        socket.emit("statusUpdate", "Analyzing " + item.name);
+       
 
         norminette.parseData(item.content, () => {
             socket.emit("results", {
