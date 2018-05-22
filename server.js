@@ -18,7 +18,9 @@ app.get("/client.js", (req, res) => {
 let server = app.listen(port, () => {
 	console.log("Serveur lancé sur le port: " + port)
 });
-
+app.use(express.static('css'));
+app.use(express.static('fonts'));
+app.use(express.static('colors'));
 let socket = io(server);
 
 socket.on("connection", socket => {
