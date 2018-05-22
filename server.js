@@ -27,20 +27,7 @@ socket.on("connection", socket => {
 	console.log("Client connected : " + socket.handshake.address);
 	socket.emit("connected");
 	socket.on("sendDate", arg=>{
+		console.log(arg);
 		socket.emit("statusUpdate", "Analyzing " + item.name);
 	})
-});
-
-socket.on("sendData", arg => {
-    console.log(socket.handshake.address + " sent data");
-    arg.forEach((item, index, array) => {
-       
-
-        norminette.parseData(item.content, () => {
-            socket.emit("results", {
-                name: item.name,
-                result: norminette.errorList
-            });
-        });
-    });
 });

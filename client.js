@@ -48,15 +48,15 @@ window.addEventListener("load", function(){
 });
 
 
-// socket.on("connection", () => {
-    // console.log("Connected to server");
-// });
+socket.on("connection", () => {
+    console.log("Connected to server");
+});
 
-// socket.on("statusUpdate", (a) => {
-    // console.log("Server status : " + a)
-// });
+socket.on("statusUpdate", (a) => {
+    console.log("Server status : " + a)
+});
 
-// socket.on("results", (arg) => {
-    // console.log("Response : \n");
-    // console.log(arg);
-// })
+socket.on("results", (arg) => {
+    console.log("Response : \n");
+    console.log(arg);
+})
