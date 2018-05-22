@@ -1,4 +1,4 @@
-// let socket = io();
+let socket = io();
 let fileData = []
 
 window.addEventListener("load", function(){
