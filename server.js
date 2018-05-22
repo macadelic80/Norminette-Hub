@@ -28,6 +28,6 @@ socket.on("connection", socket => {
 	socket.emit("connected");
 	socket.on("sendData", arg=>{
 		console.log(arg);
-		socket.emit("statusUpdate", "Analyzing " + item.name);
+		socket.emit("statusUpdate", "Analyzing " + arg);
 	})
 });
