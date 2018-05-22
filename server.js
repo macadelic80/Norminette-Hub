@@ -26,7 +26,7 @@ let socket = io(server);
 socket.on("connection", socket => {
 	console.log("Client connected : " + socket.handshake.address);
 	socket.emit("connected");
-	socket.on("sendDate", arg=>{
+	socket.on("sendData", arg=>{
 		console.log(arg);
 		socket.emit("statusUpdate", "Analyzing " + item.name);
 	})
