@@ -1,0 +1,23 @@
+{
+  "name": "node-norminette",
+  "version": "0.0.0",
+  "description": "Node version of the 42 school's Norminette",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://gitlab.com/19-students/Node-Norminette.git"
+  },
+  "author": "19 Students",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://gitlab.com/19-students/Node-Norminette/issues"
+  },
+  "homepage": "https://gitlab.com/19-students/Node-Norminette#README",
+  "dependencies": {
+    "express": "^4.16.3",
+    "socket.io": "latest"
+  }
+}
