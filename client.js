@@ -1,12 +1,13 @@
 let socket = io();
-let fileData = []
+let fileData = [];
 
 window.addEventListener("load", function(){
 	document.getElementById('UploadButton').addEventListener('click', function(arg){
-		console.log("event: click", arg);
-		console.log("Sending ", fileData);
+		// console.log("event: click", arg);
+		console.log("Sending this :", fileData);
+		socket.emit("test", "null");
 		socket.emit("sendData", fileData);
-	});  
+	});
 	document.getElementById('FileBox').addEventListener('change', function(arg){
 		let files = arg.target.files,
 			reader = new FileReader();
@@ -28,13 +29,13 @@ window.addEventListener("load", function(){
 	});
 	let dropper = document.querySelector('#UploadBox');
 	dropper.addEventListener('dragover', function(e) {
-		e.preventDefault(); 
+		e.preventDefault();
 	});
-	
+
 	dropper.addEventListener('drop', function(e) {
 		console.log('Vous avez bien déposé votre élément !');
 		dropper.style.borderStyle = '';
-		
+
 	});
 	dropper.addEventListener('dragenter', function() {
 		dropper.style.borderStyle = 'dashed';
@@ -47,16 +48,20 @@ window.addEventListener("load", function(){
 	})
 });
 
-
-socket.on("connection", () => {
+socket.on("connect", () => {
     console.log("Connected to server");
 });
 
+socket.on("disconnect", () => {
+    console.log("Disconnected");
+});
+
 socket.on("statusUpdate", (a) => {
-    console.log("Server status : " + a)
+    console.log("Server status : " + a);
 });
 
 socket.on("results", (arg) => {
     console.log("Response : \n");
     console.log(arg);
-})
+});
+

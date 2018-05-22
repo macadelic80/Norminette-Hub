@@ -14,9 +14,7 @@ class Norminette {
             this.checkLineLength(lines[i]);
         }
 
-        if(callback) {
-            callback();
-        }
+        callback(this);
     }
 
     checkLineLength(lineContent) {
@@ -39,4 +37,4 @@ class Norminette {
 
 }
 
-module.exports = new Norminette();
+module.exports = Norminette;
