@@ -11,23 +11,34 @@ app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname + "/index.html"));
 });
 
-app.get("/client.js", (req, res) => {
-    res.sendFile(path.join(__dirname + "/client.js"));
+app.get("/:target", (req, res) => {
+    res.sendFile(path.join(__dirname + "/" + req.params.target));
+})
+
+app.get("/:subfolder/:target", (req, res) => {
+    res.sendFile(path.join(__dirname + "/" + req.params.subfolder + "/" + req.params.target));
 })
 
 let server = app.listen(port, () => {
 	console.log("Serveur lancé sur le port: " + port)
 });
-app.use(express.static('css'));
-app.use(express.static('fonts'));
-app.use(express.static('colors'));
+
 let socket = io(server);
 
 socket.on("connection", socket => {
 	console.log("Client connected : " + socket.handshake.address);
-	socket.emit("connected");
-	socket.on("sendData", arg=>{
-		console.log(arg);
-		socket.emit("statusUpdate", arg);
-	})
+});
+
+socket.on("sendData", arg => {
+    console.log(socket.handshake.address + " sent data");
+    arg.forEach((item, index, array) => {
+        socket.emit("statusUpdate", "Analyzing " + item.name);
+
+        norminette.parseData(item.content, () => {
+            socket.emit("results", {
+                name: item.name,
+                result: norminette.errorList
+            });
+        });
+    });
 });

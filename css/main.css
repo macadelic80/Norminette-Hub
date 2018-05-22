@@ -1735,7 +1735,8 @@ a.back-to-top:hover, a.back-to-top:focus {
   color: #fff;
   line-height: 20px;
   margin: 0;
-  padding-right: 50px;
+  padding-right: 25px;
+  padding-left: 25px;
 }
 
 .footer-area ul li a {
