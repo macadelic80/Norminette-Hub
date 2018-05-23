@@ -18,7 +18,7 @@ class Norminette {
 
     addError(errorText, lineNumber) {
         this.errors.push({
-			line: lineNumber
+			line: lineNumber,
 			error: errorText
 		});
     }
