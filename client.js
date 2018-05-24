@@ -68,8 +68,16 @@ window.addEventListener("load", function(){
         var html = "<h2 class=\"inner-title wow fadeInUp\" data-wow-delay=\"0.4s\">" + data.name + "</h2><table class='results-table'>";
         html += "<tr><th>Line</th><th>Error text</th></tr>"
 		var lastLine = 0;
+
         data.results.forEach((item) => {
-            html += "<tr><td class='results-table-line'>";
+            html += "<tr";
+
+            if(lastLine != item.line) {
+                html += " class='top-bar'"
+            }
+
+            html += ">";
+            html += "<td class='results-table-line'>";
 
             if(lastLine != item.line) {
                 html += item.line;

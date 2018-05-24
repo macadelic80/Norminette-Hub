@@ -331,7 +331,7 @@ class Norminette {
             }
         }
         else if (element.match(/\/\//) && !this.stringChain && !this.blockComment) {
-            this.addError("Usage of forbidden inline comment (//)");
+            this.addError("Usage of forbidden inline comment (<span class='results-text-operator'>//</span>)");
             this.inlineComment = true;
         }
         else if (element.match(/\n/)) {
@@ -359,7 +359,7 @@ class Norminette {
             case 'switch':
             case 'case':
             case 'goto':
-                this.addError("Usage of forbidden keyword : " + element);
+                this.addError("Usage of forbidden keyword : <span class='results-text-keyword'>" + element + "</span>");
         }
     }
 
@@ -371,7 +371,7 @@ class Norminette {
             case "break":
             case "continue":
                 if ((this.currentElementIndex + 1 < this.elements.length) && (!this.elements[this.currentElementIndex + 1].match(" "))) {
-                    this.addError("Space required after keyword " + element);
+                    this.addError("Space required after keyword <span class='results-text-keyword'>" + element + "</span>");
                 }
                 break;
         }
@@ -390,13 +390,13 @@ class Norminette {
             }
 
             if(before && !after) {
-                this.addError("Space missing before operator " + element);
+                this.addError("Space missing before operator <span class='results-text-operator'>" + element + "</span>");
             }
             else if(!before && after) {
-                this.addError("Space missing after operator " + element);
+                this.addError("Space missing after operator <span class='results-text-operator'>" + element + "</span>");
             }
             else if(before && after) {
-                this.addError("Space missing before and after operator " + element);
+                this.addError("Space missing before and after operator <span class='results-text-operator'>" + element + "</span>");
             }
 
         }
@@ -407,7 +407,7 @@ class Norminette {
             if(this.getNextSignificantElement() !== "\n") {
                 var nextElement = this.getNextElement();
                 if(nextElement !== " " && nextElement !== "\t") {
-                    this.addError("Missing space after " + element);
+                    this.addError("Missing space after <span class='results-text-operator'>" + element + "</span>");
                 }
             }
         }
@@ -416,7 +416,7 @@ class Norminette {
     checkBlockDelimitersPosition(element) {
         if(element.match(/[{}]/)) {
             if(this.getNextSignificantElement() !== "\n" || this.getPreviousSignificantElement() !== "\n") {
-                this.addError("Block sign " + element + " must be alone on his line");
+                this.addError("Block sign <span class='results-text-block'>" + element + "</span> must be alone on his line");
             }
         }
     }
@@ -535,10 +535,10 @@ class Norminette {
         }
 
         if(functionObject.arguments.length === 0) {
-            this.addError("Functions must at least count one argument (void if none)")
+            this.addError("Function <span class='results-text-function'>" + functionObject.name + "</span> must at least count one argument (void if none)")
         }
         else if(functionObject.arguments.length > 4) {
-            this.addError("Functions must count 4 arguments max (this one has " + functionObject.arguments.length + ")");
+            this.addError("Function <span class='results-text-function'>" + functionObject.name + "</span> has more than 4 arguments");
         }
     }
 
@@ -574,7 +574,7 @@ class Norminette {
 
         if(lineCount > 25) {
             this.currentLine = functionObject.line;
-            this.addError("Function " + functionObject.name + " contains more than 25 lines");
+            this.addError("Function <span class='results-text-function'>" + functionObject.name + "</span> contains more than 25 lines");
         }
 
     }

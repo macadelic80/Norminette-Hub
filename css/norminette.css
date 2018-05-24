@@ -12,6 +12,10 @@ th {
     border-bottom: solid black 1px;
 }
 
+.top-bar {
+    border-top: solid black 1px;
+}
+
 .results-table-line {
     font-weight: bold !important;
     min-width: 50px;
@@ -19,4 +23,24 @@ th {
 
 .results-table-text {
     font-weight: normal !important;
+}
+
+.results-text-function {
+    font-weight: bold;
+    color: #8900ff;
+}
+
+.results-text-operator {
+    font-weight: bold;
+    color: #be0500;
+}
+
+.results-text-keyword {
+    font-weight: bold;
+    color: #05bf00;
+}
+
+.results-text-block {
+    font-weight: bold;
+    color: #003abf;
 }
