@@ -24,7 +24,7 @@ let http = app.listen(port, () => {
 
 
 let server = io(http);
-let Instances = [];
+let instances = [];
 
 server.on("connection", socket => {
 	console.log("Client connected : " + socket.handshake.address);
@@ -33,24 +33,21 @@ server.on("connection", socket => {
     socket.on("test", function(data) {
         console.log("Test successful");
     });
-	
+
     socket.on("sendData", data => {
-		let eph = {
-			author: socket.handshake.address,
-			files: [],
-			socket
-		}
         console.log(socket.handshake.address + " sent data");
         data.forEach((item, index, array) => {
             socket.emit("statusUpdate", "Analyzing " + item.name);
-			
-			let instance = new Norminette(item.name, item.content, [index + 1, data.length]);
-			
-			eph.files.push(instance);
-			
-			Instances[socket.handshake.address] = eph;
-			
-			instance.analyse();
+
+            var norminette = new Norminette();
+
+            norminette.analyze(item.content, (norminetteInstance) => {
+                console.log("Data parsed !");
+                socket.emit("results", {
+                    name: item.name,
+                    results: norminetteInstance.errorList
+                });
+            });
         });
     });
 

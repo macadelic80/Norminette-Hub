@@ -1,0 +1,22 @@
+#norminette-results {
+    max-width: 500px;
+    text-align: left !important;
+    margin: auto;
+}
+
+table .results-table > * > * {
+    vertical-align: text-top;
+}
+
+th {
+    border-bottom: solid black 1px;
+}
+
+.results-table-line {
+    font-weight: bold !important;
+    min-width: 50px;
+}
+
+.results-table-text {
+    font-weight: normal !important;
+}
