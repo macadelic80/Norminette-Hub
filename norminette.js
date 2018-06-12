@@ -206,7 +206,7 @@ class Norminette {
             index++;
         }
 
-        return undefined;
+        return null;
     }
 
     getNextSignificantElementIndex(excludeNewLines = false) {
@@ -415,7 +415,7 @@ class Norminette {
 
     checkBlockDelimitersPosition(element) {
         if(element.match(/[{}]/)) {
-            if(this.getNextSignificantElement() !== "\n" || this.getPreviousSignificantElement() !== "\n") {
+            if((this.getNextSignificantElement() !== null && this.getNextSignificantElement() !== "\n") || this.getPreviousSignificantElement() !== "\n") {
                 this.addError("Block sign <span class='results-text-block'>" + element + "</span> must be alone on his line");
             }
         }
