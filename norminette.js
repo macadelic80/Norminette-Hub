@@ -383,8 +383,14 @@ class Norminette {
             var after = false;
 
             if(!this.getNextElement().match(/[\s]/)) {
-                after = true;
+                var previousSignificant = this.getPreviousSignificantElement();
+
+                if (!this.isOperator(previousSignificant) &&
+                    !this.isKeyword(previousSignificant)) {
+                    after = true;
+                }
             }
+
             if(!this.getPreviousElement().match(/[\s]/)) {
                 before = true;
             }
@@ -472,6 +478,7 @@ class Norminette {
                     arguments: []
                 };
 
+
                 this.treatingFunctionArguments = true;
             }
 
@@ -490,6 +497,10 @@ class Norminette {
                     }
 
                     this.treatingFunctionArguments = false;
+
+                    console.log("Function found : " + this.functionInTreatment.name);
+                    console.log("Arguments : " + this.functionInTreatment.argumentContent);
+
                     this.treatFunctionArguments(this.functionInTreatment);
                     this.functionInTreatment = {};
                 }
@@ -527,14 +538,12 @@ class Norminette {
 
             this.currentElementIndex++;
         });
-
-        this.currentElementIndex++;
-
+        
         if(currentArgument.length > 0) {
             functionObject.arguments.push(currentArgument);
         }
 
-        if(functionObject.arguments.length === 0) {
+        if(functionObject.arguments.length === 0 && functionObject.definition === true) {
             this.addError("Function <span class='results-text-function'>" + functionObject.name + "</span> must at least count one argument (void if none)")
         }
         else if(functionObject.arguments.length > 4) {
